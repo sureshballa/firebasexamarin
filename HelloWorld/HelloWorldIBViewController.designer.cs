@@ -16,11 +16,15 @@ namespace HelloWorld
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel Label { get; set; }
+		UIButton PreviewButton { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton PreviewButton { get; set; }
+		UITextView TextKeyName { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextView TextKeyValue { get; set; }
 
 		[Action ("Next_UpInside:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -32,13 +36,17 @@ namespace HelloWorld
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (Label != null) {
-				Label.Dispose ();
-				Label = null;
-			}
 			if (PreviewButton != null) {
 				PreviewButton.Dispose ();
 				PreviewButton = null;
+			}
+			if (TextKeyName != null) {
+				TextKeyName.Dispose ();
+				TextKeyName = null;
+			}
+			if (TextKeyValue != null) {
+				TextKeyValue.Dispose ();
+				TextKeyValue = null;
 			}
 		}
 	}

@@ -10,7 +10,7 @@ namespace HelloWorld
 	{
 		// class-level declarations
 
-		UIWindow window;
+		//UIWindow window;
 		HelloWorldIBViewController viewController;
 
 		public override UIWindow Window {

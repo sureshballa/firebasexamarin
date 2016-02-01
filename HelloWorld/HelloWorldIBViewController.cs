@@ -17,13 +17,38 @@ namespace HelloWorld
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			var firebase = new Firebase("https://boiling-torch-6531.firebaseio.com");
-			var nsObject = new NSString ("Wow");
+			//var nsObject = new NSString ("Wow");
 
-			firebase.SetValue(nsObject);
-			firebase.AddObserver(new NSString ("New Key"), new NSKeyValueObservingOptions(), dataSnapShot => {
-				this.Label.Text = dataSnapShot.NewValue.ToString();
-			});
+			var values = NSDictionary.FromObjectsAndKeys (new NSObject[] {
+				new NSString ("KeyValue")
+			},
+				             new NSObject[] {
+					new NSString ("KeyName")
+				});
 
+			var rootNode = NSDictionary.FromObjectAndKey (values, new NSString("root"));
+
+			firebase.SetValue(rootNode);
+
+			this.TextKeyName.Text = "KeyName";
+			this.TextKeyValue.Text = "KeyValue";
+
+
+//			firebase.ObserveEventType(FEventType.ChildChanged, snapshot =>
+//				{
+//					var key = snapshot.Key;
+//					var value = snapshot.Value;
+//					this.TextKeyName.Text = snapshot.Key;
+//					this.TextKeyValue.Text = snapshot.Value.ToString();
+//				});
+
+			firebase.ChildByAppendingPath("root/KeyName").ObserveEventType(FEventType.Value, snapshot =>
+				{
+					var key = snapshot.Key;
+					var value = snapshot.Value;
+					this.TextKeyName.Text = snapshot.Key;
+					this.TextKeyValue.Text = snapshot.Value.ToString();
+				});
 
 		}
 
@@ -38,12 +63,12 @@ namespace HelloWorld
 
 		partial void Preview_TouchUpInside (UIButton sender)
 		{
-			this.Label.Text = "Preview Clicked";
+			//this.LabelKeyName.Text = "Preview Clicked";
 		}
 
 		partial void Next_UpInside (UIButton sender)
 		{
-			this.Label.Text = "Next Clicked";
+			//this.LabelKeyName.Text = "Next Clicked";
 		}
 
 	}
